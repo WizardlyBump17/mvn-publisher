@@ -1,0 +1,29 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+}
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+group = 'com.wizardlybump17.mvn-publisher'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compileOnly(
+            'org.projectlombok:lombok:1.18.22',
+            'org.jetbrains:annotations:22.0.0',
+    )
+    annotationProcessor('org.projectlombok:lombok:1.18.22')
+}
+
+shadowJar {
+    archiveFileName = 'mvn-publisher-' + project.version + '.jar'
+    manifest {
+        attributes 'Main-Class': 'com.wizardlybump17.mvnpublisher.Main'
+    }
+}
